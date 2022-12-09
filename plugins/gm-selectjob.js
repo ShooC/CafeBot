@@ -13,7 +13,6 @@ let jobs = `
 │Dokter
 │Pedagang
 │Ojek
-│Prostitusi
 └——————— - [ ⭐ ]
 
 Ketik:
@@ -106,20 +105,6 @@ if (new Date - global.db.data.users[m.sender].lastjb > 0) throw `anda telah meng
 global.db.data.users[m.sender].pedagang += true
 global.db.data.users[m.sender].lastjb = new Date * 1
 conn.reply(m.chat, `Kamu memilih job ${type}`, m)
-break
-case 'prostitusi':
-if (global.db.data.users[m.sender].polisi == true) throw 'kamu telah memilih job lain'
-if (global.db.data.users[m.sender].montir == true) throw 'kamu telah memilih job lain'
-if (global.db.data.users[m.sender].petani  == true) throw 'kamu telah memilih job lain'
-if (global.db.data.users[m.sender].kuli  == true) throw 'kamu telah memilih job lain'
-if (global.db.data.users[m.sender].prostitusi  == true) throw 'kamu telah memilih job lain'
-if (global.db.data.users[m.sender].dokter  == true) throw 'kamu telah memilih job lain'
-if (global.db.data.users[m.sender].ojek  == true) throw 'kamu telah memilih job lain'
-if (global.db.data.users[m.sender].pedagang  == true) throw 'kan kamu udh kerja'
-if (new Date - global.db.data.users[m.sender].lastjb > 0) throw `anda telah menggunakan job ini, silahkan tunggu ${msToTime(time - new Date())} untung mengganti job`
-global.db.data.users[m.sender].pedagang += true
-global.db.data.users[m.sender].lastjb = new Date * 1
-conn.reply(m.chat, `Kamu memilih job ${type}`, m)
 default:
                         return conn.reply(m.chat, jobs, m)
                 }
@@ -129,7 +114,7 @@ default:
 
 handler.help = ['pilihjob','selectjob']
 handler.tags = ['pekerjaan']
-handler.command = /^(pilihjob|selectjob)$/i 
+handler.command = /^(pilihjob|selectjob|pickjob|pilihpekerjaan)$/i 
 
 module.exports = handler
 //

@@ -11,9 +11,6 @@ let time = global.db.data.users[m.sender].lastjb + 300000
 //THIS PLUGINS BY RIZKY
 //PEMBATAS
 let penumpan = ['mas mas','bapak bapak','cewe sma','bocil epep','emak emak']
-let korbann = ['loli','cewek smp','cewe sma','bocil esde','tante tante']
-let korban = korbann[Math.floor(Math.random() * korbann.length)]
-let penumpang = penumpan[Math.floor(Math.random() * penumpan.length)]
 let daganga = ['wortel','sawi','selada','tomat','seledri','cabai','daging','ikan','ayam']
 let dagangan = daganga[Math.floor(Math.random() * daganga.length)]
 let pasie = ['sakit kepala','cedera','luka bakar','patah tulang']
@@ -61,7 +58,6 @@ ${usedPrefix}selectjob ojek
 │Dokter
 │Pedagang
 │Ojek
-│Prostitusi
 └——————— - [ ⭐ ]. +
 *📌Jika Fitur Ini eror laporkan owner*
 `.trim()
@@ -91,13 +87,6 @@ if (new Date - global.db.data.users[m.sender].lastkerja < 300000)  throw `Kamu s
 	global.db.data.users[m.sender].money += duitm
 global.db.data.users[m.sender].lastkerja = new Date * 1
 	m.reply(`Kamu menyembuhkan pasien *${pasien}*\nDan mendapatkan uang senilai *Rp ${duitm}*`)
-break
-case 'prostitusi':
- if (global.db.data.users[m.sender].prostitusi == false) throw 'ini bukan tugas kamu atau kamu pengangguran!'
-if (new Date - global.db.data.users[m.sender].lastkerja < 300000)  throw `Kamu sudah bekerja\nSaatnya istirahat selama ${msToTime(time - new Date())}`
-	global.db.data.users[m.sender].money += duitm
-global.db.data.users[m.sender].lastkerja = new Date * 1
-	m.reply(`Kamu Ngewe *${korban}*\nDan mendapatkan uang senilai *Rp ${duitm}*`)
 break
        case 'petani':
 if (global.db.data.users[m.sender].petani == false) throw 'ini bukan tugas kamu atau kamu pengangguran!'
