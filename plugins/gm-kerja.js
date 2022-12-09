@@ -11,6 +11,7 @@ let time = global.db.data.users[m.sender].lastjb + 300000
 //THIS PLUGINS BY RIZKY
 //PEMBATAS
 let penumpan = ['mas mas','bapak bapak','cewe sma','bocil epep','emak emak']
+let penumpang = penumpang[Math.floor(Math.random() * penumpang.length)]
 let daganga = ['wortel','sawi','selada','tomat','seledri','cabai','daging','ikan','ayam']
 let dagangan = daganga[Math.floor(Math.random() * daganga.length)]
 let pasie = ['sakit kepala','cedera','luka bakar','patah tulang']
