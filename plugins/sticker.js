@@ -1,47 +1,55 @@
-const { sticker1, sticker5 } = require('../lib/stiker')
-
-let handler = async (m, { conn }) => {
-    let stiker = false
+let { webp2png } = require('../lib/webp2mp4')
+let handler = async (m, { conn, usedPrefix, command, text, args }) => {
+    //try {
+    var q = m.quoted ? m.quoted : m
+    if(!q) throw `Kirim atau balas media dengan caption *${usedPrefix}${command}*\nnote: video maksimal 10 detik`
+    var mime = (q.msg || q).mimetype || ''
     try {
-        let q = m.quoted ? m.quoted : m
-        let mime = (q.msg || q).mimetype || ''
-        if (/webp/.test(mime)) {
-            let img = await q.download()
-            if (!img) throw `reply sticker with command s`
-            stiker = await sticker5(img, false, packname, author)
-        } else if (/image/.test(mime)) {
-            let img = await q.download()
-            if (!img) throw `reply image with command s`
-            stiker = await sticker5(img, false, packname, author)
-        } else if (/video/.test(mime)) {
-            if ((q.msg || q).seconds > 11) return m.reply('maksimal 10 detik!')
-            let img = await q.download()
-            if (!img) throw `reply video with command s`
-            stiker = await sticker5(img, false, packname, author)
-        } else if (m.quoted.text) {
-            if (isUrl(m.quoted.text)) stiker = await sticker(false, m.quoted.text, packname, author)
-            else throw 'URL is not valid! end with jpg/gif/png'
+    if (/webp/.test(mime)) {
+        var med = await q.download()
+        //var med = await webp2png(ras)
+        var sel = med
+        //conn.sendStimg(m.chat, sel, m, { packname: packname, author: author })
         }
-    } catch (e) {
-        throw e
-    }
-    finally {
-        if (stiker) {
-            m.reply(stiker_wait)
-            await conn.sendFile(m.chat, stiker, '', '', m)
+    else if (/image/.test(mime)) {
+        var med = await q.download()
+        var sel = med
+        //conn.sendStimg(m.chat, sel, m, { packname: packname, author: author })
         }
-        else {
-
-            throw 0
+    else if (/video/.test(mime)) {
+        var med = await q.download()
+        var sel = med
+        //conn.sendStimg(m.chat, sel, m, { packname: packname, author: author })
         }
-    }
+    else if(isUrl) { 
+        var url = `${args[0]}`
+        var sel = url
+        //conn.sendStimg(m.chat, sel, m, { packname: packname, author: author })
+        }
+    } finally {
+        if(sel) conn.sendStimg(m.chat, sel, m, { packname: packname, author: author, 
+  contextInfo: { mentionedJid: [m.sender],
+    externalAdReply :{
+    showAdAttribution: true,
+    mediaUrl: data.sc,
+    mediaType: 2,
+    description: data.deslink, 
+    title: '🕰️ Done',
+    body: wm,
+    thumbnail: await(await fetch(img)).buffer(),
+    sourceUrl: data.sc
+     }}
+  })
+        else throw `Kirim atau balas media dengan caption *${usedPrefix}${command}*\nnote: video maksimal 10 detik`
+       //throw e //`Kirim atau balas media dengan caption *${usedPrefix}${command}*\nnote: video maksimal 10 detik`
+  }
 }
-handler.help = ['sticker']
+handler.help = ['sticker <reply/send media>']
 handler.tags = ['sticker']
-handler.command = /^(stiker|s|sticker)$/i
+handler.command = /^(s(tic?k(er)?)?(gif)?(video)?)$/i
 
 module.exports = handler
 
 const isUrl = (text) => {
-    return text.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)(jpe?g|gif|png|mp4)/, 'gi'))
+  return text.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)(jpe?g|gif|png)/, 'gi'))
 }
